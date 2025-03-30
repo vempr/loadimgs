@@ -12,6 +12,7 @@ func main() {
 	var singleInput string
 
 	fmt.Println("\n====== File Downloader ======")
+	fmt.Println()
 
 	for {
 		fmt.Print("Enter the file source link: ")

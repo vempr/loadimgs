@@ -27,7 +27,7 @@ func DownloadSingle(link string) {
 
 	helpers.Seperate()
 
-	fmt.Printf("File successfully saved to %v\n", resp.Filename)
+	fmt.Printf("File successfully saved to .\\%v\n", resp.Filename)
 }
 
 func DownloadMultiple(link string) {
@@ -69,7 +69,7 @@ func DownloadMultiple(link string) {
 
 	helpers.Seperate()
 
-	fmt.Printf("Files successfully saved to %v\n", newPath[strings.LastIndex(newPath, "downloads"):])
+	fmt.Printf("Files successfully saved to .\\%v\n", newPath[strings.LastIndex(newPath, "downloads"):])
 }
 
 func createDirectory() string {
