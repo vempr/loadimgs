@@ -22,9 +22,9 @@ func main() {
 			break
 		}
 
-		fmt.Printf("\033[1A\033[K")
+		helpers.ClearInput()
 	}
-	if (!strings.Contains(link, "/") || !strings.Contains(link, ".")) {
+	if !strings.Contains(link, "/") || !strings.Contains(link, ".") {
 		helpers.Seperate()
 		fmt.Printf("ERROR: Invalid link [%v]\n", link)
 		return
