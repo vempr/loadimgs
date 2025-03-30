@@ -10,12 +10,11 @@ import (
 func main() {
 	var link string
 	var singleInput string
-	var start, end int
 
-	fmt.Println("\n====== Image Downloader ======")
+	fmt.Println("\n====== File Downloader ======")
 
 	for {
-		fmt.Print("Enter the image source link: ")
+		fmt.Print("Enter the file source link: ")
 		fmt.Scanln(&link)
 
 		if strings.TrimSpace(link) != "" {
@@ -26,7 +25,7 @@ func main() {
 	}
 
 	for strings.ToUpper(singleInput) != "Y" && strings.ToUpper(singleInput) != "N" {
-		fmt.Print("Download a single image? [Y/N]: ")
+		fmt.Print("Download a single file? [Y/N]: ")
 		fmt.Scan(&singleInput)
 	}
 	single := strings.ToUpper(singleInput) == "Y"
@@ -36,23 +35,6 @@ func main() {
 	if single {
 		DownloadSingle(link)
 	} else {
-		fmt.Println("Configuring multiple image download...")
-
-		lastSlash := strings.LastIndex(link, "/")
-		imagesLink := link[:lastSlash+1]
-		fmt.Printf("Extracted base link [%v]\n", imagesLink)
-
-		fmt.Print("Enter starting index: ")
-		fmt.Scan(&start)
-		fmt.Print("Enter ending index: ")
-		fmt.Scan(&end)
-
-		lastDot := strings.LastIndex(link, ".")
-		format := link[lastDot+1:]
-
-		helpers.Seperate()
-
-		fmt.Printf("Downloading images from [%v]\n", imagesLink)
-		fmt.Println(start, end, format)
+		DownloadMultiple(link)
 	}
 }
