@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
+
+	"github.com/vempr/loadimgs/helpers"
 )
 
 func main() {
@@ -29,10 +31,10 @@ func main() {
 	}
 	single := strings.ToUpper(singleInput) == "Y"
 
-	seperate()
+	helpers.Seperate()
 
-	if (single) {
-		fmt.Printf("Downloading single image from [%v]\n", link)
+	if single {
+		DownloadSingle(link)
 	} else {
 		fmt.Println("Configuring multiple image download...")
 
@@ -48,15 +50,9 @@ func main() {
 		lastDot := strings.LastIndex(link, ".")
 		format := link[lastDot+1:]
 
-		seperate()
+		helpers.Seperate()
 
 		fmt.Printf("Downloading images from [%v]\n", imagesLink)
 		fmt.Println(start, end, format)
 	}
-}
-
-func seperate () {
-	fmt.Println()
-	fmt.Println("--------------------")
-	fmt.Println()
 }
