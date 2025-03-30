@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -39,10 +40,8 @@ func DownloadMultiple(link string) {
 	baseLink := link[:lastSlash+1]
 	fmt.Printf("Extracted base link [%v]\n", baseLink)
 
-	fmt.Print("Enter starting index: ")
-	fmt.Scan(&start)
-	fmt.Print("Enter ending index: ")
-	fmt.Scan(&end)
+	start = getValidInteger("Enter starting index: ")
+	end = getValidInteger("Enter ending index: ")
 
 	format := link[strings.LastIndex(link, ".")+1:]
 
@@ -59,7 +58,7 @@ func DownloadMultiple(link string) {
 		resp, err := grab.Get(newPath, downloadLink)
 		fmt.Printf("  [%v]: Imported image [%v]\n", resp.HTTPResponse.Status, downloadLink)
 		if err != nil {
-			fmt.Println()
+			helpers.Seperate()
 			fmt.Println("ERROR:")
 			log.Fatal(err)
 		}
@@ -78,4 +77,20 @@ func createDirectory() string {
 	os.MkdirAll(newPath, os.ModePerm)
 
 	return newPath
+}
+
+func getValidInteger(prompt string) int {
+	var input string
+
+	for {
+		fmt.Print(prompt)
+		fmt.Scanln(&input)
+
+		value, err := strconv.Atoi(input)
+		if err == nil {
+			return value
+		} else {
+			fmt.Printf("\033[1A\033[K")
+		}
+	}
 }
