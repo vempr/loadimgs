@@ -24,6 +24,11 @@ func main() {
 
 		fmt.Printf("\033[1A\033[K")
 	}
+	if (!strings.Contains(link, "/") || !strings.Contains(link, ".")) {
+		helpers.Seperate()
+		fmt.Printf("ERROR: Invalid link [%v]\n", link)
+		return
+	}
 
 	for strings.ToUpper(singleInput) != "Y" && strings.ToUpper(singleInput) != "N" {
 		fmt.Print("Download a single file? [Y/N]: ")

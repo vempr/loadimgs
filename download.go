@@ -43,6 +43,12 @@ func DownloadMultiple(link string) {
 	start = getValidInteger("Enter starting index: ")
 	end = getValidInteger("Enter ending index: ")
 
+	if (start > end) {
+		helpers.Seperate()
+		fmt.Println("ERROR: Starting index can not be larger than ending index")
+		return
+	}
+
 	format := link[strings.LastIndex(link, ".")+1:]
 
 	helpers.Seperate()
@@ -83,14 +89,18 @@ func getValidInteger(prompt string) int {
 	var input string
 
 	for {
-		fmt.Print(prompt)
+ 		fmt.Printf("\r%s", prompt)
 		fmt.Scanln(&input)
 
 		value, err := strconv.Atoi(input)
 		if err == nil {
 			return value
-		} else {
-			fmt.Printf("\033[1A\033[K")
 		}
+
+		fmt.Print("\033[F")
+		fmt.Print("\r\033[K")
+		fmt.Print("\033[E")
+		fmt.Print("\r\033[K")
+		fmt.Print("\033[F")
 	}
 }
