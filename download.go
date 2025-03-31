@@ -13,7 +13,7 @@ import (
 	"github.com/vempr/loadimgs/helpers"
 )
 
-func DownloadSingle(link string) {
+func DownloadSingle(link string) string {
 	fmt.Println("  Creating necessary directories...")
 
 	newPath := createDirectory()
@@ -23,15 +23,17 @@ func DownloadSingle(link string) {
 	resp, err := grab.Get(newPath, link)
 	fmt.Printf("  Response Status: %v\n", resp.HTTPResponse.Status)
 	if err != nil {
+		helpers.Seperate()
 		log.Fatal(err)
 	}
 
 	helpers.Seperate()
 
-	fmt.Printf("File successfully saved to .\\%v\n", resp.Filename)
+	fmt.Printf("File successfully saved to '.\\%v'\n", resp.Filename)
+	return newPath
 }
 
-func DownloadMultiple(link string) {
+func DownloadMultiple(link string) string {
 	var start, end int
 
 	fmt.Println("Extracting base link...")
@@ -45,8 +47,7 @@ func DownloadMultiple(link string) {
 
 	if start > end {
 		helpers.Seperate()
-		fmt.Println("ERROR: Starting index can not be larger than ending index")
-		return
+		log.Fatal("ERROR: Starting index can not be larger than ending index")
 	}
 
 	format := link[strings.LastIndex(link, ".")+1:]
@@ -74,7 +75,9 @@ func DownloadMultiple(link string) {
 
 	helpers.Seperate()
 
-	fmt.Printf("Files successfully saved to .\\%v\n", newPath[strings.LastIndex(newPath, "downloads"):])
+	savedPath := newPath[strings.LastIndex(newPath, "downloads"):]
+	fmt.Printf("Files successfully saved to '.\\%v'\n", savedPath)
+	return newPath
 }
 
 func createDirectory() string {
