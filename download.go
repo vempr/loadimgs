@@ -63,7 +63,7 @@ func DownloadMultiple(link string) string {
 		downloadLink := fmt.Sprint(baseLink, start, ".", format)
 
 		resp, err := grab.Get(newPath, downloadLink)
-		fmt.Printf("  [%v]: Imported image [%v]\n", resp.HTTPResponse.Status, downloadLink)
+		fmt.Printf("  [%v]: Imported file [%v]\n", resp.HTTPResponse.Status, downloadLink)
 		if err != nil {
 			helpers.Seperate()
 			fmt.Println("ERROR:")
